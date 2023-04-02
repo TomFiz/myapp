@@ -10,57 +10,13 @@ import matplotlib.pyplot as plt
 import bokeh
 from math import pi
 
-
-# In[2]:
-
-
+#Extract result
 def get_res(s,year,taux,seuil):
     if s == "Scrutin majoritaire" : scrutin = "majoritaire"
     elif s == "Scrutin proportionnel départemental" : scrutin = "propdep"
     elif s == "Scrutin proportionnel national" : scrutin = "propnatio"
     else : scrutin = "propregio"
     return pd.read_excel(scrutin+"_"+str(year)+".xlsx",sheet_name = scrutin+"_"+str(year)+"_"+str(seuil)+"_"+str(taux))
-
-
-# In[3]:
-
-
-def affiche_hemicycle(axe, annee, serie_label, serie_value, serie_color) :
-    # Conversion
-    labels = list(serie_label)
-    values = list(serie_value)
-    colors = list(serie_color)
-    
-    # nb sieges
-    nb_sieges = sum(values)
-    
-    # Formation d'un hémicycle (50% du cercle non affiché)
-    labels.append("")
-    values.append(nb_sieges)
-    colors.append('white')
-
-    # Ajout du graphe dans le subplot
-    axe.pie(values, labels=labels, colors=colors, textprops={'fontsize': 8},radius = 1)
-    axe.add_artist(plt.Circle((0, 0), 0.6, color='white'))
-    axe.text(0, 0.2, annee, horizontalalignment = 'center', verticalalignment = 'center',fontweight = 'bold', fontsize = 18) 
-    axe.text(0, 0, '('+str(nb_sieges)+')', horizontalalignment = 'center', verticalalignment = 'center', fontsize = 12) 
-
-
-# Affichage du résultat réel des éléction
-def display(ax,scrutin,annee,taux,seuil) :
-    
-    dfp = get_res(scrutin,annee,taux,seuil)
-    dfp = dfp[dfp['Sièges']>0]
-
-    affiche_hemicycle(
-        ax, 
-        annee,
-        dfp['Nuance'],
-        dfp['Sièges'],
-        dfp['Couleur'])
-
-
-# In[4]:
 
 
 from os.path import dirname, join
