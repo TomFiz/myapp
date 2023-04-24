@@ -17,7 +17,7 @@ def get_res(s,year,taux,seuil):
     elif s == "Scrutin proportionnel départemental" : scrutin = "propdep"
     elif s == "Scrutin proportionnel national" : scrutin = "propnatio"
     else : scrutin = "propregio"
-    return pd.read_excel("C:/Users/TomFi/Desktop/Cours/PSC/Affichage_res/"+scrutin+"/"+ scrutin+"_"+str(year)+".xlsx",sheet_name = scrutin+"_"+str(year)+"_"+str(seuil)+ "_"+str(taux))
+    return pd.read_excel(scrutin+"_"+str(year)+".xlsx",sheet_name = scrutin+"_"+str(year)+"_"+str(seuil)+ "_"+str(taux))
 
 
 
